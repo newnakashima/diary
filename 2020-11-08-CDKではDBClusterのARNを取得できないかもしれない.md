@@ -1,0 +1,33 @@
+---
+templateKey: blog-post
+title: CDKではDBClusterのARNを取得できないかもしれない
+date: 2020-11-08 01:44:11
+tags:
+  - CDK
+  - AWS
+  - Aurora
+---
+
+色々やってみたのだがAuroraのClusterのARNが取得できない。
+
+https://stackoverflow.com/questions/60627544/how-to-get-the-arn-of-an-aws-cdk-delivery-stream-construct
+
+上記のページをみて、IDを取得してからGetAttでARNを取得する方法もやってみたが、CloudFormationの制約でそもそもAuroraのクラスタではGetAttで取得できる属性にARNが無い。
+
+https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#aws-resource-rds-dbcluster-return-values
+
+上記に書いてある内容によれば、クラスタのエンドポイントとポートしか取得できない。
+
+CDKのGitHub Issueにもこの問題は挙げられてて、ARNの命名規則をもとに手で作るという対応方法が語られてるが、命名規則がある日変わった場合に対応できないのでイケてない。CDKのバージョンも日々上がるし、そう毎日毎日CDKデプロイするわけじゃないと思うのでAPIの変化に気づかないまま時間が経つ気がする。たまに実行するたびに毎回修正する必要があるのではコード化する恩恵があまり受けられない。
+
+https://github.com/aws/aws-cdk/issues/2107
+
+クラスターのARNを返すという機能が一旦はmasterまでマージされたものの何故かリバートされてる。結局CDKのコードではアスタリスクを使わざるを得ない気がする。
+
+これはCDKの問題ではなくCloudFormationの設計がなんかおかしいということだと思う。CloudFormationは他にもRDS Proxyのデプロイが永遠に終わらない問題もあり、ちょっと信頼性が怪しい。
+
+インフラの自動化は人類にはまだ早いのではないかという気がしてきている。毎日同じ環境がガンガン複製されるようなプロジェクトでもない限りインフラの自動化は楽よりも苦のほうが圧倒的に大きい。特にクラウドはそうだ。サーバー構築の自動化ならまだいい。Ansibleとかはシェルでコマンドを打ったときとPlaybook書いたときとで移植が比較的簡単に可能だ。それにサーバーを壊して作り直すというケースは運用の中で普通にあったりだとか、あるいはAnsibleで書いてあることによって気軽にサーバーを壊したりできるという恩恵が非常に大きい。
+
+しかしクラウドはCLIとCfn、Terraform、CDKなどが互いに移植可能かというと結構たいへんだ。それぞれに特有のハマりどころも多い。しかも一回構築したものをすべて更地にしてCDKデプロイする、みたいなケースはほとんどない。あったとしてもRDS作ったりCloudFront作ったりするのに結構な時間がかかるし久しぶりに実行したら何故かコケたりする。
+
+クラウドもっとシンプルになってほしい。API覚えるだけで時間と体力を消耗するのは勘弁。VPSに自分で色々構築したほうが技術のスコープは広いししっかりした知識は身につくし結局はそのほうが得、みたいなことになりかねないんじゃないの。どうなの。
