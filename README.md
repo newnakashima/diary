@@ -2,7 +2,7 @@
 
 ## 記事作成スクリプト
 
-`new_entry.py` を使用して、現在日付のフォルダ構造（`year/month/day/`）に新しい記事ファイルを作成できます。
+`new_entry.py` を使用して、posts ディレクトリ内の現在日付のフォルダ構造（`year/month/day/`）に新しい記事ファイルを作成できます。
 
 ### 前提環境
 
@@ -19,5 +19,5 @@ chmod +x new_entry.py
 ./new_entry.py "記事のタイトル"
 ```
 
-実行すると `yyyy/mm/dd/yyyy-mm-dd 記事のタイトル.md` が作成されます。
+実行すると posts ディレクトリの配下に `yyyy/mm/dd/yyyy-mm-dd 記事のタイトル.md` が作成されます。
 フォルダが存在しない場合は自動的に作成されます。
