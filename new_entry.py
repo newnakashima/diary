@@ -13,7 +13,7 @@ def create_diary_entry(title):
     
     # Base directory is the directory where this script is located
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    target_dir = os.path.join(base_dir, year, month, day)
+    target_dir = os.path.join(base_dir, 'posts', year, month, day)
     
     # Create directory if it doesn't exist
     os.makedirs(target_dir, exist_ok=True)
