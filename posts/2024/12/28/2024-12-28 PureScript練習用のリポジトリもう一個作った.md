@@ -1,3 +1,9 @@
+---
+title: PureScript練習用のリポジトリもう一個作った
+date: 2024-12-28
+tags: []
+---
+
 # PureScript練習用のリポジトリもう一個作った
 
 https://github.com/newnakashima/pure-script-odai

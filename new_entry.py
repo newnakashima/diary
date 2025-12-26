@@ -26,8 +26,13 @@ def create_diary_entry(title):
         print(f"Error: File '{filename}' already exists.")
         return
         
-    # Create the file with a title header
+    # Create the file with frontmatter
     with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(f"---\n")
+        f.write(f"title: {title}\n")
+        f.write(f"date: {date_str}\n")
+        f.write(f"tags: []\n")
+        f.write(f"---\n\n")
         f.write(f"# {title}\n\n")
         
     print(f"Created: {filepath}")

@@ -1,3 +1,9 @@
+---
+title: 実例によるPureScript 4章の最後の問題
+date: 2025-01-09
+tags: []
+---
+
 # 実例によるPureScript 4章の最後の問題
 
 [実例によるPureScript4章の最後の問題](https://gemmaro.github.io/purescript-book/chapter4.html#%E6%BC%94%E7%BF%92-4)の2問目だが、問題の意味がわからない。なのでちょっとズルだがテストコードから先に見た。
