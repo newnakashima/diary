@@ -31,6 +31,7 @@ def create_diary_entry(title):
         f.write(f"---\n")
         f.write(f"title: {title}\n")
         f.write(f"date: {date_str}\n")
+        f.write(f"eyecatch: \n")
         f.write(f"tags: []\n")
         f.write(f"---\n\n")
         f.write(f"# {title}\n\n")
